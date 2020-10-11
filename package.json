@@ -1,0 +1,30 @@
+{
+  "name": "hit-list",
+  "version": "0.0.1",
+  "description": "hit-list",
+  "main": "dist/index.js",
+  "scripts": {
+		"build": "tsc",
+		"test": "node test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://Mineru98:%40dos664500@github.com/Mineru98/HitList.git"
+  },
+  "keywords": [
+    "hit",
+    "list",
+    "hit-list",
+    "list",
+    "stack-list"
+  ],
+  "author": "Mineru",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Mineru98/HitList/issues"
+  },
+  "homepage": "https://github.com/Mineru98/HitList#readme",
+  "dependencies": {
+    "typescript": "^4.0.3"
+  }
+}
