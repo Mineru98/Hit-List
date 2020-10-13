@@ -44,13 +44,22 @@ console.log(obj_result);
 /*
 [
 	{
-		
+		'hash key 1': 2,
+		data: {
+			name: 'amazon', count: 2
+		}
 	},
 	{
-	
+		'hash key 1': 3,
+		data: {
+			name: 'apple', count: 3
+		}
 	},
 	{
-	
+		'hash key 1': 1,
+		data: {
+			name: 'amazon', count: 1
+		}
 	},
 ]
 */
