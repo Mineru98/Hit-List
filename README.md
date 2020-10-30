@@ -15,7 +15,7 @@ npm install hit-list
 
 ### Usage
 ```javascript
-const hList = require("hit-list").HitList;
+const hList = require("hit-list");
 
 const str_list = ["apple", "apple", "apple", "banana", "banana", "orange"];
 const num_list = [1, 1, 1, 2, 2, 3];

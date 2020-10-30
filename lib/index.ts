@@ -1,4 +1,5 @@
 import * as crypto from 'crypto';
+import { PRODUCT, DEV, TEST } from './mode';
 
 interface hList {
 	[key: string]: any;
@@ -8,18 +9,38 @@ interface normalObject {
 	[key: string]: number;
 }
 
+/**/
 interface hashObject {
 	[key: string]: any;
 }
 
+enum Mode {
+	PRODUCT = 0,
+  DEV = 1,
+	TEST = 2
+}
+
+/**
+ * 데이터 무결성 체크를 하기 위해서 단방향 암호화를 한 뒤 반환함.
+ * @param {string} text
+ * @returns {string}
+ */
 function encrypt(text: string) {
 	return crypto.createHash('sha256').update(text).digest('base64');
 }
 
-export class HitList {
+function toList(tmp: any) {
+	const list = [];
+	for(let k in tmp) {
+		list.push(tmp[<any>k]);
+	}
+	return list;
+}
+
+class HitList {
 	private hitList?: hList[];
 	
-	constructor(private list: any[] = []) {
+	constructor(list: any[] = [], private mode: Mode = Mode.PRODUCT) {
 		const itemType = typeof list[0];
 		const itemTypeCheckSum = list.length === list.filter((n) => typeof n === itemType).length;
 
@@ -67,7 +88,16 @@ export class HitList {
 		this.hitList = hitList;
 	}
 	
-	get() {
-		return this.hitList;
+	get(): Array<hList> {
+		return toList(this.hitList);
+	}
+	
+	count(key: string) {
+		const list: Array<hList> = toList(this.hitList);
+		list.forEach((value: any) => {
+			console.log(Object.keys(value));
+		});
 	}
 }
+
+export = HitList;
