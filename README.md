@@ -1,6 +1,6 @@
 # JavaScript Hit List
 
-Hit-List is a javascript data structure implementation that expresses the number of duplicates and the number of duplicates in the list with duplicate values.
+Hit-List is a data structure that expresses the number of duplicates of duplicated data in a collection type array.
 
 * [npm](https://www.npmjs.com/package/hit-list)
 * [GitHub](https://github.com/Mineru98/hit-list) 
