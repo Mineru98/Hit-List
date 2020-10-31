@@ -1,5 +1,4 @@
 const hList = require('./dist');
-const mode = require('./dist/mode');
 const DEV = require('./dist/mode').DEV;
 
 const str_list = ["apple", "apple", "apple", "banana", "banana", "orange"];
@@ -27,3 +26,7 @@ const o_num = obj_result.count({ name: "apple", count: 1 });
 console.log(a_num);
 console.log(n_num);
 console.log(o_num);
+
+console.log(obj_result.filter((item) => {
+	return item > 1;
+}).get());

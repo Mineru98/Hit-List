@@ -16,8 +16,7 @@ npm install hit-list
 ### Usage
 ```javascript
 const hList = require("hit-list");
-const mode = require("hit-list/mode");
-const DEV = require("hit-list/mode").DEV;
+const DEV = require("hit-list/mode").DEV; // You can see the error log.
 
 const str_list = ["apple", "apple", "apple", "banana", "banana", "orange"];
 const num_list = [1, 1, 1, 2, 2, 3];
@@ -81,6 +80,27 @@ console.log(n_num);
 console.log(o_num);
 /*
 3
+*/
+
+console.log(obj_result.filter((item) => {
+	return item > 1;
+}).get());
+
+/*
+[
+	{
+		'hash key 1': 2,
+		data: {
+			name: 'amazon', count: 2
+		}
+	},
+	{
+		'hash key 1': 3,
+		data: {
+			name: 'apple', count: 1
+		}
+	},
+]
 */
 
 ```

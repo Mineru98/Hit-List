@@ -9,7 +9,6 @@ interface normalObject {
 	[key: string]: number;
 }
 
-/**/
 interface hashObject {
 	[key: string]: any;
 }
@@ -179,6 +178,20 @@ class HitList {
 		} else {
 			return result;
 		}
+	}
+	
+	filter(condition: any): HitList {
+		const list: any[] = [];
+		const tList: any[] = toList(this.hitList);
+		
+		for(let idx in tList) {
+			if (condition(Object.values(tList[idx])[0])) {
+				list.push(tList[idx])
+			}
+		}
+		
+		this.hitList = list;
+		return this;
 	}
 }
 
