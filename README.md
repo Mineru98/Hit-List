@@ -51,13 +51,13 @@ console.log(obj_result.get());
 		}
 	},
 	{
-		'hash key 1': 3,
+		'hash key 2': 1,
 		data: {
 			name: 'apple', count: 1
 		}
 	},
 	{
-		'hash key 1': 1,
+		'hash key 3': 3,
 		data: {
 			name: 'amazon', count: 3
 		}
@@ -95,7 +95,7 @@ console.log(obj_result.filter((item) => {
 		}
 	},
 	{
-		'hash key 1': 3,
+		'hash key 2': 3,
 		data: {
 			name: 'apple', count: 1
 		}
