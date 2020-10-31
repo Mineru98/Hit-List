@@ -16,7 +16,6 @@ npm install hit-list
 ### Usage
 ```javascript
 const hList = require("hit-list");
-const DEV = require("hit-list/mode").DEV; // You can see the error log.
 
 const str_list = ["apple", "apple", "apple", "banana", "banana", "orange"];
 const num_list = [1, 1, 1, 2, 2, 3];
@@ -31,7 +30,7 @@ const obj_list = [
 
 const str_result = new hList(str_list);
 const num_result = new hList(num_list);
-const obj_result = new hList(obj_list, DEV);
+const obj_result = new hList(obj_list);
 
 console.log(str_result.get());
 /*

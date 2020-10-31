@@ -1,5 +1,4 @@
 import * as crypto from 'crypto';
-import { PRODUCT, DEV } from './mode';
 
 interface hList {
 	[key: string]: any;
@@ -13,15 +12,7 @@ interface hashObject {
 	[key: string]: any;
 }
 
-enum Mode {
-	PRODUCT = 0,
-	DEV = 1,
-}
-
-enum ERROR {
-	LACKLIST = 0,
-	TYPECOMPLICATED = 1,
-}
+enum ERROR { LACKLIST = 0,	TYPECOMPLICATED = 1 }
 
 /**
  * 데이터 무결성 체크를 하기 위해서 단방향 암호화를 한 뒤 반환함.
@@ -50,7 +41,7 @@ class HitList {
 	private listType: string;
 	private interrupt: ERROR[] = [];
 
-	constructor(list: any[] = [], private mode: Mode = Mode.PRODUCT) {
+	constructor(list: any[] = []) {
 		const itemType = typeof list[0];
 		this.listType = typeof list[0];
 		const itemTypeCheckSum = list.length === list.filter((n) => typeof n === itemType).length;
@@ -106,9 +97,7 @@ class HitList {
 	get(): any {
 		this.interrupt.forEach((error: ERROR) => {
 			if (error == ERROR.LACKLIST) {
-				if (this.mode == Mode.DEV) {
-					console.error('Error : Array is not large enough.');
-				}
+				console.error('Error : Array is not large enough.');
 			}
 		});
 
@@ -122,14 +111,10 @@ class HitList {
 	count(key: any): any {
 		this.interrupt.forEach((error: ERROR) => {
 			if (error == ERROR.LACKLIST) {
-				if (this.mode == Mode.DEV) {
-					console.error('Error : Array is not large enough.');
-				}
+				console.error('Error : Array is not large enough.');
 				return;
 			} else if (error == ERROR.TYPECOMPLICATED) {
-				if (this.mode == Mode.DEV) {
-					console.error('Error : Not all elements have the same type.');
-				}
+				console.error('Error : Not all elements have the same type.');
 			}
 		});
 
@@ -138,10 +123,8 @@ class HitList {
 		}
 
 		if (typeof key == 'undefined') {
-			if (this.mode == Mode.DEV) {
-				console.error('Error : Input the desired key value as a parameter.');
-				return;
-			}
+			console.error('Error : Input the desired key value as a parameter.');
+			return;
 		}
 
 		const list: Array<hList> = toList(this.hitList);
@@ -179,17 +162,17 @@ class HitList {
 			return result;
 		}
 	}
-	
+
 	filter(condition: any): HitList {
 		const list: any[] = [];
 		const tList: any[] = toList(this.hitList);
-		
-		for(let idx in tList) {
+
+		for (let idx in tList) {
 			if (condition(Object.values(tList[idx])[0])) {
-				list.push(tList[idx])
+				list.push(tList[idx]);
 			}
 		}
-		
+
 		this.hitList = list;
 		return this;
 	}
