@@ -12,19 +12,46 @@ interface hashObject {
 	[key: string]: any;
 }
 
+enum ERROR { LACKLIST = 0,	TYPECOMPLICATED = 1 }
+
+/**
+ * 데이터 무결성 체크를 하기 위해서 단방향 암호화를 한 뒤 반환함.
+ * @param {string} text
+ * @returns {string}
+ */
 function encrypt(text: string) {
 	return crypto.createHash('sha256').update(text).digest('base64');
 }
 
-export class HitList {
+/**
+ * Array<hList>을 일반 배열 객체로 변환함.
+ * @param {Array<hList>} source
+ * @returns {Array<Any>}
+ */
+function toList(source: any): Array<any> {
+	const list = [];
+	for (let k in source) {
+		list.push(source[<any>k]);
+	}
+	return list;
+}
+
+class HitList {
 	private hitList?: hList[];
-	
-	constructor(private list: any[] = []) {
+	private listType: string;
+	private interrupt: ERROR[] = [];
+
+	constructor(list: any[] = []) {
 		const itemType = typeof list[0];
+		this.listType = typeof list[0];
 		const itemTypeCheckSum = list.length === list.filter((n) => typeof n === itemType).length;
 
+		if (list.length == 0) {
+			this.interrupt.push(ERROR.LACKLIST);
+		}
+
 		if (!itemTypeCheckSum) {
-			throw new Error('Not all elements have the same type.');
+			this.interrupt.push(ERROR.TYPECOMPLICATED);
 		}
 
 		const stackList =
@@ -66,8 +93,89 @@ export class HitList {
 		});
 		this.hitList = hitList;
 	}
-	
-	get() {
-		return this.hitList;
+
+	get(): any {
+		this.interrupt.forEach((error: ERROR) => {
+			if (error == ERROR.LACKLIST) {
+				console.error('Error : Array is not large enough.');
+			}
+		});
+
+		if (this.interrupt.length > 0) {
+			return;
+		}
+
+		return toList(this.hitList);
+	}
+
+	count(key: any): any {
+		this.interrupt.forEach((error: ERROR) => {
+			if (error == ERROR.LACKLIST) {
+				console.error('Error : Array is not large enough.');
+				return;
+			} else if (error == ERROR.TYPECOMPLICATED) {
+				console.error('Error : Not all elements have the same type.');
+			}
+		});
+
+		if (this.interrupt.length > 0) {
+			return;
+		}
+
+		if (typeof key == 'undefined') {
+			console.error('Error : Input the desired key value as a parameter.');
+			return;
+		}
+
+		const list: Array<hList> = toList(this.hitList);
+		let result: string = '';
+
+		switch (this.listType) {
+			case 'string':
+				list.forEach((value: any) => {
+					if (Object.keys(value)[0] == key) {
+						result = value[key];
+					}
+				});
+				break;
+			case 'number':
+				list.forEach((value: any) => {
+					if (Object.keys(value)[0] == key) {
+						result = value[key];
+					}
+				});
+				break;
+			case 'object':
+				list.forEach((value: any) => {
+					if (JSON.stringify(value.data) == JSON.stringify(key)) {
+						result = value[encrypt(JSON.stringify(key))];
+					}
+				});
+				break;
+			default:
+				break;
+		}
+
+		if (result == '') {
+			return undefined;
+		} else {
+			return result;
+		}
+	}
+
+	filter(condition: any): HitList {
+		const list: any[] = [];
+		const tList: any[] = toList(this.hitList);
+
+		for (let idx in tList) {
+			if (condition(Object.values(tList[idx])[0])) {
+				list.push(tList[idx]);
+			}
+		}
+
+		this.hitList = list;
+		return this;
 	}
 }
+
+export = HitList;
