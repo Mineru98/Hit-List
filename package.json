@@ -1,6 +1,6 @@
 {
   "name": "hit-list",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Hit-List is a data structure that expresses the number of duplicates of duplicated data in a collection type array.",
   "main": "dist/index.js",
   "scripts": {
