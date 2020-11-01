@@ -9,14 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://Mineru98:%40dos664500@github.com/Mineru98/HitList.git"
+    "url": "git+https://github.com/Mineru98/HitList.git"
   },
   "keywords": [
     "hit",
     "list",
     "hit-list",
     "list",
-    "stack-list"
+    "stack-list",
+		"duplicate-list"
   ],
   "author": "Mineru",
   "license": "MIT",
