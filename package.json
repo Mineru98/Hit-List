@@ -1,7 +1,7 @@
 {
   "name": "hit-list",
-  "version": "0.1.4",
-  "description": "hit-list",
+  "version": "0.1.5",
+  "description": "Hit-List is a data structure that expresses the number of duplicates of duplicated data in a collection type array.",
   "main": "dist/index.js",
   "scripts": {
     "build": "tsc",
@@ -9,14 +9,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://Mineru98:%40dos664500@github.com/Mineru98/HitList.git"
+    "url": "git+https://github.com/Mineru98/HitList.git"
   },
   "keywords": [
     "hit",
     "list",
     "hit-list",
     "list",
-    "stack-list"
+    "stack-list",
+		"duplicate-list"
   ],
   "author": "Mineru",
   "license": "MIT",
